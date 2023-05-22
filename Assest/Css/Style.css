@@ -228,6 +228,11 @@ playlist-div::-webkit-scrollbar-thumb {
     cursor: pointer;
 
 }
+@media only screen and (max-width: 480px) {
+    .music {
+        max-width: 100%;
+        height: auto;
+    }
 
  footer {
     font-weight: 600;
