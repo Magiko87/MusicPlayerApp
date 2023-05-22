@@ -232,16 +232,20 @@ playlist-div::-webkit-scrollbar-thumb {
     cursor: pointer;
 
 }
-@media only screen and (max-width: 600px) {
-    html {
-        font-size: 8px;
-    }
-}
 
  footer {
     font-weight: 600;
     font-size: 16px;
     text-align: center;
-    margin-top: -30px; 
+    margin: -60px; 
+    z-index: 4;
   }
-    
+  @media only screen and (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+    footer{
+       padding: 50px;
+        
+    }
+}
