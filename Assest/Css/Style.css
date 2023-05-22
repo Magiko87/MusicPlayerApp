@@ -244,8 +244,21 @@ playlist-div::-webkit-scrollbar-thumb {
     html {
         font-size: 10px;
     }
-    footer{
+    footer {
        padding: 50px;
         
     }
-}
+    .play-all {
+        width: 60%;
+
+    }
+    .play {
+        width: 90px;
+
+    }
+    .buttons > * {
+
+        width: 50px;
+    }
+ 
+  }
