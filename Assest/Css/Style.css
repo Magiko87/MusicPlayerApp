@@ -1,0 +1,123 @@
+html {
+    font-size: 10px;
+}
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: grey;
+}
+p {
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+img {
+    width: 100%;
+}
+
+.box {
+    width: 100%;
+    height: 100vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+.music {
+    position: relative;
+    background: white;
+    width: 25rem;
+    border-radius: 5px;
+    padding: 1rem;
+    /* overflow: hidden; */
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.header .fas {
+    font-size: 1.6rem;
+
+}
+.fa-bars {
+    cursor: pointer;
+
+}
+.header h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+
+}
+/* Details */
+.details {
+    margin: 2rem 0;
+    text-align: center;
+}
+.details img {
+    width: 70%;
+    border: 3px solid yellow;
+    margin-bottom: 1rem;
+
+}
+.details .artist {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: cornflowerblue;
+
+}
+/* Controls */
+.controls {
+    background: green;
+    padding: 2rem 1rem;
+    border-radius: 5rem 5rem 0 0;
+
+}
+.song-timer {
+    color: rgb(227, 43, 43);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin: 1rem 0;
+
+}
+/* Range slider */
+input[type="range"] {
+    appearance: none;
+    width: 50%;
+    outline: none;
+    height: 2px ;
+    margin: 0 10%;
+}
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 2rem;
+    width: 2rem;
+    background:cornflowerblue ;
+    border-radius: 50%;
+    cursor: pointer;
+
+} 
+
+/* Music Playlist */
+.music-playlist {
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    background: blue;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: all .5s;
+    
+}
+
+ 
+
+
+
+
+
+ footer {
+    font-size: 14px;
+    text-align: center;
+    margin-top: auto; /* Sposta il footer all'estremità inferiore */
+  }
