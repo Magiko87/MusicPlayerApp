@@ -21,7 +21,11 @@ img {
     align-items: center;
 }
 .music {
-    margin: 20rem; 
+    margin: 0; 
+    padding: 1rem;
+    max-width: 35rem;
+    margin: 0 auto;
+    overflow-y: auto;
     position: relative;
     background: rgb(144, 26, 26);
     width: 35rem;
@@ -229,13 +233,10 @@ playlist-div::-webkit-scrollbar-thumb {
 
 }
 @media only screen and (max-width: 600px) {
-    .box {
-        overflow-x: hidden;
-      }
-      .music {
-        overflow-x: hidden;
-      }
+    html {
+        font-size: 8px;
     }
+}
 
  footer {
     font-weight: 600;
