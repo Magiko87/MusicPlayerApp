@@ -1,5 +1,5 @@
 const play = document.querySelector(".play"),
-    previus = document.querySelector(".prev"),
+    previous = document.querySelector(".prev"),
     next = document.querySelector(".next"),
     //
 
@@ -15,7 +15,7 @@ const play = document.querySelector(".play"),
     volumeIcon = document.querySelector("#volume-icon"),
     currentVolume = document.querySelector("#volume"),
     //
-    autoPlay = document.querySelector(".play-all "),
+    autoPlayBtn = document.querySelector(".play-all "),
     //
     hamBurger = document.querySelector(".fa-bars"),
     closeIcone = document.querySelector(".fa-times"),
@@ -31,6 +31,12 @@ let track = document.createElement("audio");
 
 // All Event Listener
 play.addEventListener("click", justPlay);
+next.addEventListener("click", nextSong);
+previous.addEventListener("click", prevSong);
+autoPlayBtn.addEventListener("click", autoPlayToggle);
+volumeIcon.addEventListener("click", muteSound);
+currentVolume.addEventListener("change", changeVolume);
+slider.addEventListener("change", changeDuration);
 
 //Load Tracks
 function loadTrack(indexTrack) {
@@ -67,4 +73,69 @@ function pauseSong() {
     songIsPlaying = false;
     play.innerHTML = '<i class="fas fa-play "></i>';
    
+}
+//Next Song
+function nextSong() {
+    if (indexTrack < trackList.length - 1) {
+        indexTrack++; 
+        loadTrack(indexTrack);
+        playSong()
+
+    }else {
+        indexTrack = 0
+        loadTrack(indexTrack);
+        playSong(); 
+
+    }
+
+}
+
+// Prev song 
+function prevSong() {
+    if (indexTrack > 0) {
+        indexTrack--; 
+        loadTrack(indexTrack);
+        playSong()
+
+    }else {
+        indexTrack = trackList.length -1;
+        loadTrack(indexTrack);
+        playSong(); 
+
+    }
+
+} 
+
+// Mute Sound
+function muteSound () {
+    track.volume = 0;
+    showVolume.innerHTML = 0
+    currentVolume.value = 0;
+}
+
+// Change Volume
+function changeVolume() {
+    showVolume.value = currentVolume.value;
+    track.volume = currentVolume.value / 100;
+}
+
+//Change Duration
+function changeDuration() {
+    let sliderPosition = track.duration * (slider.value
+        /100);0 
+    track.currentTime = sliderPosition;     
+}
+
+
+//Auto Play    
+function autoPlayToggle() {
+    if (autoplay == 0) {
+        autoplay = 1;
+        autoPlayBtn.style.background = "#db6400";
+
+    } else{
+        autoplay = 0;
+        autoPlayBtn.style.background = "#ccc";
+
+    }
 }
