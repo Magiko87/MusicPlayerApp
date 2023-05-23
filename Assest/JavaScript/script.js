@@ -21,7 +21,10 @@ const play = document.querySelector(".play"),
     closeIcone = document.querySelector(".fa-times"),
     //
     musicPlaylist = document.querySelector(".music-playlist"),
+    pDiv = document.querySelector(".playlist-div"),
     playList = document.querySelector(".playlist");
+
+
 
 let timer;
 let autoplay = 0;
@@ -37,7 +40,9 @@ autoPlayBtn.addEventListener("click", autoPlayToggle);
 volumeIcon.addEventListener("click", muteSound);
 currentVolume.addEventListener("change", changeVolume);
 slider.addEventListener("change", changeDuration);
-track.addEventListener("timeupdate" , songTimeUpdate);
+track.addEventListener("timeupdate", songTimeUpdate);
+hamBurger.addEventListener("click", showPlayList);
+closeIcone.addEventListener("click", hidePlayList);
 
 //Load Tracks
 function loadTrack(indexTrack) {
@@ -127,8 +132,8 @@ function changeVolume() {
 
 //Change Duration
 function changeDuration() {
-    let sliderPosition = track.duration * (slider.value / 
-    100); 
+    let sliderPosition = track.duration * (slider.value /
+        100);
     track.currentTime = sliderPosition;
 }
 
@@ -147,7 +152,7 @@ function autoPlayToggle() {
 }
 
 // Reset Slider
-function resetSlider () {
+function resetSlider() {
     slider.value = 0;
 
 }
@@ -156,22 +161,20 @@ function resetSlider () {
 function updateSlider() {
     let position = 0;
 
-    if (!isNaN(track.duration)){
+    if (!isNaN(track.duration)) {
         position = track.currentTime * (100 / track.duration);
         slider.value = position;
 
     }
 
-    if(track.ended) {
+    if (track.ended) {
         play.innerHTML = '<i class="fas fa-play "></i>';
-        if (autoplay == 1 && indexTrack < trackList.length - 1) 
-        { 
+        if (autoplay == 1 && indexTrack < trackList.length - 1) {
             indexTrack++;
             loadTrack(indexTrack);
             playSong();
 
-        }else if (autoplay == 1 && indexTrack == trackList.length -1) 
-        {
+        } else if (autoplay == 1 && indexTrack == trackList.length - 1) {
             indexTrack = 0;
             loadTrack(indexTrack);
             playSong();
@@ -183,32 +186,72 @@ function updateSlider() {
 
 // Update Current song time
 function songTimeUpdate() {
-    if (track.duration) { 
+    if (track.duration) {
         let curmins = Math.floor(track.currentTime / 60);
-    let cursecs = Math.floor(track.currentTime - curmins * 60);
+        let cursecs = Math.floor(track.currentTime - curmins * 60);
 
-    let durmins = Math.floor(track.duration / 60);
-    let dursecs = Math.floor(track.duration - durmins * 60);
+        let durmins = Math.floor(track.duration / 60);
+        let dursecs = Math.floor(track.duration - durmins * 60);
 
-    if (dursecs < 10) {
-        dursecs = "0" + dursecs;
-    }
-     if (durmins < 10) {
-        durmins = "0" + durmins;
-    }
-    
-    if (curmins < 10) {
-        curmins = "0" + curmins;
-    }
-    if (cursecs < 10) {
-        cursecs = "0" + cursecs;
-    }
-    trackCurrentTime.innerHTML = curmins + ":" + cursecs;
-    trackDuration.innerHTML = durmins + ":" + dursecs;
+        if (dursecs < 10) {
+            dursecs = "0" + dursecs;
+        }
+        if (durmins < 10) {
+            durmins = "0" + durmins;
+        }
+
+        if (curmins < 10) {
+            curmins = "0" + curmins;
+        }
+        if (cursecs < 10) {
+            cursecs = "0" + cursecs;
+        }
+        trackCurrentTime.innerHTML = curmins + ":" + cursecs;
+        trackDuration.innerHTML = durmins + ":" + dursecs;
     } else {
         trackCurrentTime.innerHTML = "00" + ":" + "00";
         trackDuration.innerHTML = "00" + ":" + "00";
 
     }
-    
+
 }
+
+// Show PlayList
+function showPlayList() {
+    musicPlaylist.style.transform = "translateX(-2%)";
+
+}
+// Hide PlayList
+function hidePlayList() {
+    musicPlaylist.style.transform = "translateX(-100%)";
+
+}
+
+//Display Tracks in playlist
+let counter = 1;
+function displayTracks() {
+    for (let i = 0; i < trackList.length; i++) {
+        console.log(trackList[i].name);
+        let div = document.createElement("div");
+        div.classList.add("playlist");
+        div.innerHTML = `
+             <span class="song-index">${counter++}</span>
+             <p class="single-song">${trackList[i].name}</p>
+
+        `;
+        pDiv.appendChild(div);
+    }
+    playFromPlaylist ();
+}
+displayTracks();
+
+// Play song from playlist
+function playFromPlaylist() {
+    pDiv.addEventListener("click" , (e) => {
+        if (e.target.classList.contains("single-song")) {
+            alert(e.target.innerHTML);
+
+        }
+    })
+}
+

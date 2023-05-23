@@ -196,7 +196,7 @@ input[type="range"]::-webkit-slider-thumb {
 .playlist-div{
     width: 100%;
     height: 80vh;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 /* Playlist Scroll Bar */
 .playlist-div::-webkit-scrollbar {
