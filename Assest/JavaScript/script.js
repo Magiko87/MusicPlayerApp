@@ -37,17 +37,18 @@ autoPlayBtn.addEventListener("click", autoPlayToggle);
 volumeIcon.addEventListener("click", muteSound);
 currentVolume.addEventListener("change", changeVolume);
 slider.addEventListener("change", changeDuration);
+track.addEventListener("timeupdate" , songTimeUpdate);
 
 //Load Tracks
 function loadTrack(indexTrack) {
     clearInterval(timer);
     resetSlider();
 
+    artist.innerHTML = trackList[indexTrack].singer;
+    trackImage.src = trackList[indexTrack].img;
+    title.innerHTML = trackList[indexTrack].name;
 
-   trackImage.src = trackList[indexTrack].img;
-   title.innerHTML = trackList[indexTrack].name;
     track.src = trackList[indexTrack].path;
-    artist.innerHTML.src = trackList[indexTrack].singer;
     track.load();
 
     timer = setInterval(updateSlider, 1000);
@@ -178,4 +179,36 @@ function updateSlider() {
         }
 
     }
+}
+
+// Update Current song time
+function songTimeUpdate() {
+    if (track.duration) { 
+        let curmins = Math.floor(track.currentTime / 60);
+    let cursecs = Math.floor(track.currentTime - curmins * 60);
+
+    let durmins = Math.floor(track.duration / 60);
+    let dursecs = Math.floor(track.duration - durmins * 60);
+
+    if (dursecs < 10) {
+        dursecs = "0" + dursecs;
+    }
+     if (durmins < 10) {
+        durmins = "0" + durmins;
+    }
+    
+    if (curmins < 10) {
+        curmins = "0" + curmins;
+    }
+    if (cursecs < 10) {
+        cursecs = "0" + cursecs;
+    }
+    trackCurrentTime.innerHTML = curmins + ":" + cursecs;
+    trackDuration.innerHTML = durmins + ":" + dursecs;
+    } else {
+        trackCurrentTime.innerHTML = "00" + ":" + "00";
+        trackDuration.innerHTML = "00" + ":" + "00";
+
+    }
+    
 }
