@@ -249,7 +249,15 @@ displayTracks();
 function playFromPlaylist() {
     pDiv.addEventListener("click" , (e) => {
         if (e.target.classList.contains("single-song")) {
-            alert(e.target.innerHTML);
+            // alert(e.target.innerHTML);
+            const indexNum =  trackList.findIndex((item, index) => {
+                if (item.name === e.target.innerHTML) {
+                    return true;
+
+                }
+            });
+            loadTrack(indexNum);
+            playSong();
 
         }
     })
