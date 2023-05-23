@@ -40,12 +40,17 @@ slider.addEventListener("change", changeDuration);
 
 //Load Tracks
 function loadTrack(indexTrack) {
-    artist.innerHTML = trackList[indexTrack].singer;
-    trackImage.src = trackList[indexTrack].img;
-    title.innerHTML = trackList[indexTrack].name;
+    clearInterval(timer);
+    resetSlider();
+
+
+   trackImage.src = trackList[indexTrack].img;
+   title.innerHTML = trackList[indexTrack].name;
     track.src = trackList[indexTrack].path;
     artist.innerHTML.src = trackList[indexTrack].singer;
     track.load();
+
+    timer = setInterval(updateSlider, 1000);
 }
 loadTrack(indexTrack);
 
@@ -54,7 +59,7 @@ function justPlay() {
     if (songIsPlaying == false) {
         playSong();
 
-    }else {
+    } else {
         pauseSong();
 
     }
@@ -65,26 +70,26 @@ function playSong() {
     track.play();
     songIsPlaying = true;
     play.innerHTML = '<i class="fas fa-pause "></i>';
-   
+
 }
 //Pause Song
 function pauseSong() {
     track.pause();
     songIsPlaying = false;
     play.innerHTML = '<i class="fas fa-play "></i>';
-   
+
 }
 //Next Song
 function nextSong() {
     if (indexTrack < trackList.length - 1) {
-        indexTrack++; 
+        indexTrack++;
         loadTrack(indexTrack);
         playSong()
 
-    }else {
+    } else {
         indexTrack = 0
         loadTrack(indexTrack);
-        playSong(); 
+        playSong();
 
     }
 
@@ -93,21 +98,21 @@ function nextSong() {
 // Prev song 
 function prevSong() {
     if (indexTrack > 0) {
-        indexTrack--; 
+        indexTrack--;
         loadTrack(indexTrack);
         playSong()
 
-    }else {
-        indexTrack = trackList.length -1;
+    } else {
+        indexTrack = trackList.length - 1;
         loadTrack(indexTrack);
-        playSong(); 
+        playSong();
 
     }
 
-} 
+}
 
 // Mute Sound
-function muteSound () {
+function muteSound() {
     track.volume = 0;
     showVolume.innerHTML = 0
     currentVolume.value = 0;
@@ -121,9 +126,9 @@ function changeVolume() {
 
 //Change Duration
 function changeDuration() {
-    let sliderPosition = track.duration * (slider.value
-        /100);0 
-    track.currentTime = sliderPosition;     
+    let sliderPosition = track.duration * (slider.value / 
+    100); 
+    track.currentTime = sliderPosition;
 }
 
 
@@ -133,9 +138,44 @@ function autoPlayToggle() {
         autoplay = 1;
         autoPlayBtn.style.background = "#db6400";
 
-    } else{
+    } else {
         autoplay = 0;
         autoPlayBtn.style.background = "#ccc";
+
+    }
+}
+
+// Reset Slider
+function resetSlider () {
+    slider.value = 0;
+
+}
+
+// Update Slider
+function updateSlider() {
+    let position = 0;
+
+    if (!isNaN(track.duration)){
+        position = track.currentTime * (100 / track.duration);
+        slider.value = position;
+
+    }
+
+    if(track.ended) {
+        play.innerHTML = '<i class="fas fa-play "></i>';
+        if (autoplay == 1 && indexTrack < trackList.length - 1) 
+        { 
+            indexTrack++;
+            loadTrack(indexTrack);
+            playSong();
+
+        }else if (autoplay == 1 && indexTrack == trackList.length -1) 
+        {
+            indexTrack = 0;
+            loadTrack(indexTrack);
+            playSong();
+
+        }
 
     }
 }
