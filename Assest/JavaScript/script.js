@@ -31,13 +31,17 @@ let autoplay = 0;
 let indexTrack = 0;
 let songIsPlaying = false;
 let track = document.createElement("audio");
+let previousVolume = currentVolume.value;
 
 // All Event Listener
 play.addEventListener("click", justPlay);
 next.addEventListener("click", nextSong);
 previous.addEventListener("click", prevSong);
 autoPlayBtn.addEventListener("click", autoPlayToggle);
-volumeIcon.addEventListener("click", muteSound);
+volumeIcon.addEventListener("click", function() {
+    muteSound();
+    toggleVolume();
+  });
 currentVolume.addEventListener("change", changeVolume);
 slider.addEventListener("change", changeDuration);
 track.addEventListener("timeupdate", songTimeUpdate);
@@ -119,16 +123,56 @@ function prevSong() {
 
 // Mute Sound
 function muteSound() {
-    track.volume = 0;
-    showVolume.innerHTML = 0
-    currentVolume.value = 0;
+    if (track.volume === 0) {
+        // Restore the previous volume
+        track.volume = currentVolume.value / 100;
+        showVolume.innerHTML = currentVolume.value;
+        
+    } else {
+        // Mute the sound (set the volume to 0)
+        track.volume = 0;
+        showVolume.innerHTML = 0;
+        
+    }
 }
 
 // Change Volume
 function changeVolume() {
-    showVolume.value = currentVolume.value;
-    track.volume = currentVolume.value / 100;
+    let volume = currentVolume.value;
+    showVolume.innerHTML = volume;
+    track.volume = volume / 100;
+
+ //Icon Mute
+ if (volume > 0) {
+    volumeIcon.classList.remove("fa-volume-mute");
+    volumeIcon.classList.add("fa-volume-up");
+} else {
+    volumeIcon.classList.remove("fa-volume-up");
+    volumeIcon.classList.add("fa-volume-mute");
 }
+   
+}
+function toggleVolume() {
+    if (currentVolume.value > 0) {
+      previousVolume = currentVolume.value;
+      track.volume = 0;
+      currentVolume.value = 0;
+      showVolume.innerHTML = "0";
+      volumeIcon.classList.remove("fa-volume-up");
+      volumeIcon.classList.add("fa-volume-mute");
+    } else {
+      track.volume = previousVolume / 100;
+      currentVolume.value = previousVolume;
+      showVolume.innerHTML = previousVolume;
+      volumeIcon.classList.remove("fa-volume-mute");
+      volumeIcon.classList.add("fa-volume-up");
+    }
+  }
+// Real-time volume slidee
+currentVolume.addEventListener("input", changeVolume);
+
+
+
 
 //Change Duration
 function changeDuration() {
@@ -258,6 +302,7 @@ function playFromPlaylist() {
             });
             loadTrack(indexNum);
             playSong();
+            hidePlayList();
 
         }
     })
