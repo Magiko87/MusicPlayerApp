@@ -1,19 +1,7 @@
-const audioPlayer = document.getElementById("audioPlayer");
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const source = audioContext.createMediaElementSource(audioPlayer);
-
-const volumeControl = audioContext.createGain();
-source.connect(volumeControl);
-volumeControl.connect(audioContext.destination);
-
-const volumeSlider = document.getElementById("volume");
-volumeSlider.addEventListener("input", function() {
-  volumeControl.gain.value = this.value / 100;});
-
 const play = document.querySelector(".play"),
     previous = document.querySelector(".prev"),
     next = document.querySelector(".next"),
-    //
+    
 
     trackImage = document.querySelector(".track-image"),
     title = document.querySelector(".title"),

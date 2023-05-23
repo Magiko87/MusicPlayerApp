@@ -22,5 +22,11 @@ let trackList = [
         path: "./Assest/Music/Ddoje mane (feat. Raiz).mp3",
         img: "./Assest/Images/Mare_fuori.png",
         singer: "Raiz",
+    },
+    {
+        name: "Destinazione Mare",
+        path: "./Assest/Music/Tiziano Ferro - Destinazione Mare (Official Video).mp3",
+        img: "./Assest/Images/Destinazione_mare.jpeg",
+        singer: "Tiziano Ferro",
     }
 ];
