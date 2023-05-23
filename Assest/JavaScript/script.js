@@ -59,6 +59,10 @@ function loadTrack(indexTrack) {
 
     track.src = trackList[indexTrack].path;
     track.load();
+    track.addEventListener("loadedmetadata", function() {
+        trackDuration.innerHTML = formatTime(track.duration);
+    });
+
 
     timer = setInterval(updateSlider, 1000);
 }
@@ -134,6 +138,13 @@ function muteSound() {
         showVolume.innerHTML = 0;
         
     }
+}
+
+// Format Time
+function formatTime(time) {
+    let minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time % 60);
+    return (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 }
 
 // Change Volume
@@ -230,6 +241,9 @@ function updateSlider() {
 
 // Update Current song time
 function songTimeUpdate() {
+    
+    
+    
     if (track.duration) {
         let curmins = Math.floor(track.currentTime / 60);
         let cursecs = Math.floor(track.currentTime - curmins * 60);
