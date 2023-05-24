@@ -199,7 +199,7 @@ function autoPlayToggle() {
         autoplay = 1;
         autoPlayBtn.classList.add("play-all-selected");
         autoPlayBtn.style.background = "#ccc";
-        autoPlayBtn.color = "rgb(0,0,0,)";
+        autoPlayBtn.color = "#000";
         
         
         

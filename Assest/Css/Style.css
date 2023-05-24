@@ -135,7 +135,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 }
  .play-all {
-    color: #ffffff;
+    background-color: rgb(81, 83, 81);
+    color: #faf5f5;
     font-weight: 700;
     display: block;
     margin: 0 auto;
