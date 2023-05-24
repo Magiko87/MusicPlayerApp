@@ -28,5 +28,11 @@ let trackList = [
         path: "./Assest/Music/Tiziano Ferro - Destinazione Mare (Official Video).mp3",
         img: "./Assest/Images/Destinazione_mare.jpeg",
         singer: "Tiziano Ferro",
+    },
+    {
+        name: "Un Briciolo Di Allegria",
+        path: "./Assest/Music/BLANCO, Mina - Un Briciolo Di Allegria (Testo Lyrics).mp3",
+        img: "./Assest/Images/UnBriciolo.jpeg",
+        singer: "Blanco,Mina",
     }
 ];

@@ -197,11 +197,18 @@ function changeDuration() {
 function autoPlayToggle() {
     if (autoplay == 0) {
         autoplay = 1;
-        autoPlayBtn.style.background = "#db6400";
+        autoPlayBtn.classList.add("play-all-selected");
+        autoPlayBtn.style.background = "#ccc";
+        autoPlayBtn.color = "rgb(0,0,0,)";
+        
+        
+        
 
     } else {
-        autoplay = 0;
-        autoPlayBtn.style.background = "#ccc";
+        autoplay = 0
+        autoPlayBtn.classList.remove("play-all-selected");;
+        autoPlayBtn.style.background = "rgb(81, 83, 81)";
+        autoPlayBtn.color = "#ffffff";
 
     }
 }
